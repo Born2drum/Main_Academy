@@ -17,6 +17,8 @@ namespace Lab1._4
             public float frequency;
             public int RAM;
             public int memory;
+           // public ComputerType type;
+
         }
         static void Main(string[] args)
         {

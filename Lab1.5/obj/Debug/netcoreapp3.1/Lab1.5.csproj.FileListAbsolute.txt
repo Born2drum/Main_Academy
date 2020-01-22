@@ -1,0 +1,11 @@
+D:\MainAcad\Labs\Lab1.5\bin\Debug\netcoreapp3.1\Lab1.5.exe
+D:\MainAcad\Labs\Lab1.5\bin\Debug\netcoreapp3.1\Lab1.5.deps.json
+D:\MainAcad\Labs\Lab1.5\bin\Debug\netcoreapp3.1\Lab1.5.runtimeconfig.json
+D:\MainAcad\Labs\Lab1.5\bin\Debug\netcoreapp3.1\Lab1.5.runtimeconfig.dev.json
+D:\MainAcad\Labs\Lab1.5\bin\Debug\netcoreapp3.1\Lab1.5.dll
+D:\MainAcad\Labs\Lab1.5\bin\Debug\netcoreapp3.1\Lab1.5.pdb
+D:\MainAcad\Labs\Lab1.5\obj\Debug\netcoreapp3.1\Lab1.5.csprojAssemblyReference.cache
+D:\MainAcad\Labs\Lab1.5\obj\Debug\netcoreapp3.1\Lab1.5.AssemblyInfoInputs.cache
+D:\MainAcad\Labs\Lab1.5\obj\Debug\netcoreapp3.1\Lab1.5.AssemblyInfo.cs
+D:\MainAcad\Labs\Lab1.5\obj\Debug\netcoreapp3.1\Lab1.5.dll
+D:\MainAcad\Labs\Lab1.5\obj\Debug\netcoreapp3.1\Lab1.5.pdb
