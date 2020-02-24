@@ -29,9 +29,43 @@ namespace Airport_Panel_2
             Console.WriteLine($" date of arrival: {date}     number of flight: {flightNumber}     city: {city}     airline: {airline}     terminal: {terminal}      gate: {gate} ");
 
         }
+        public void Delete(List<Flight> flights)
+        {
+            Console.WriteLine("Enter the index of the element which you want to delete: ");
+            int del;
+            del = int.Parse(Console.ReadLine());
+            flights.Remove(flights[del]);
+        }
+        public void Add(List<Flight> flights)
+        {
+            Console.WriteLine("Enter on which position you want to add a new element: ");
+            int n;
+            n = int.Parse(Console.ReadLine());
+            flights.Insert(n, new Flight());
+            flights[n].date =DateTime.Parse(Console.ReadLine());
+            flights[n].city = Console.ReadLine();
+            flights[n].flightNumber = int.Parse(Console.ReadLine());
+            flights[n].airline = Console.ReadLine();
+            flights[n].terminal = Console.ReadLine();
+            flights[n].status = Console.ReadLine();
+            flights[n].gate = int.Parse(Console.ReadLine());
+        }
+        public void Edit()
+        {
+            Console.WriteLine("Enter the index of the element which you want to edit");
+            int d = int.Parse(Console.ReadLine());
 
-        
+
+        }
+
+
     }
+    public enum Actions
+    {
+        delete,
+        add,
+        edit
+    };
     class Program
     {
 
@@ -74,18 +108,20 @@ namespace Airport_Panel_2
             {
                 flights[i].Output();
             }
-            int c = int.Parse(Console.ReadLine());
-            switch (c)
+
+            Actions ac = (Actions)Enum.Parse(typeof(Actions), Console.ReadLine());
+            switch (ac)
             {
-                case 1:
-                    Delete();
+                case Actions.delete:
+                    int k = int.Parse(Console.ReadLine());
+                    Delete(flights[k]);
                     Console.WriteLine("");
                     break;
-                case 2:
+                case Actions.add:
                     Add();
                     Console.WriteLine("");
                     break;
-                case 3:
+                case Actions.edit:
                     Edit();
                     Console.WriteLine("");
                     break;
@@ -98,33 +134,7 @@ namespace Airport_Panel_2
 
 
         }
-        public void Delete()
-        {
-            Console.WriteLine("Enter the index of the element which you want to delete: ");
-            int del;
-            del = int.Parse(Console.ReadLine());
-            flights.Remove();
-        }
-        public void Add()
-        {
-            Console.WriteLine("Enter on which position you want to add a new element: ");
-            int n;
-            n = int.Parse(Console.ReadLine());
-            flights.Insert(n);
-            flights[n].date =
-            flights[n].city =
-            flights[n].flightNumber =
-            flights[n].airline =
-            flights[n].terminal =
-            flights[n].status =
-            flights[n].gate =
-        }
-        public void Edit()
-        {
-            Console.WriteLine("Enter the index of the element which you want to edit");
-            int d = int.Parse(Console.ReadLine());
-
-        }
+       
 
     }
 }
