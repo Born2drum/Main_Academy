@@ -26,7 +26,7 @@ namespace Airport_Panel_2
 
         public void Output()
         {
-            Console.WriteLine($" date of arrival: {date}    number of flight: {flightNumber}    city: {city}    airline: {airline}    terminal: {terminal}    gate: {gate} ");
+            Console.WriteLine($" date of arrival: {date}    number of flight: {flightNumber}    city: {city}    airline: {airline}    terminal: {terminal}   status: {status}   gate: {gate} ");
             Console.WriteLine("---------------------------------------------------------------------------------------------------------------------------------------");
 
         }
@@ -36,7 +36,7 @@ namespace Airport_Panel_2
     }
     public enum Actions
     {
-        delete,
+        delete=1,
         add,
         edit
     };
@@ -48,6 +48,10 @@ namespace Airport_Panel_2
             int del;
             del = int.Parse(Console.ReadLine());
             flights.Remove(flights[del]);
+            for (int i = 0; i < flights.Count; i++)
+            {
+                flights[i].Output();
+            }
         }
         public static void Add(List<Flight> flights)
         {
@@ -55,13 +59,24 @@ namespace Airport_Panel_2
             int n;
             n = int.Parse(Console.ReadLine());
             flights.Insert(n, new Flight());
+            Console.WriteLine("Enter date: ");
             flights[n].date = DateTime.Parse(Console.ReadLine());
-            flights[n].city = Console.ReadLine();
+            Console.WriteLine("Enter number of flight: ");
             flights[n].flightNumber = int.Parse(Console.ReadLine());
+            Console.WriteLine("Enter  city: ");
+            flights[n].city = Console.ReadLine();
+            Console.WriteLine("Enter airline: ");
             flights[n].airline = Console.ReadLine();
+            Console.WriteLine("Enter terminal: ");
             flights[n].terminal = Console.ReadLine();
+            Console.WriteLine("Enter status: ");
             flights[n].status = Console.ReadLine();
+            Console.WriteLine("Enter gates: ");
             flights[n].gate = int.Parse(Console.ReadLine());
+            for (int i = 0; i < flights.Count; i++)
+            {
+                flights[i].Output();
+            }
         }
         public static void Edit()
         {
@@ -112,6 +127,11 @@ namespace Airport_Panel_2
                 flights[i].Output();
             }
 
+
+            Console.WriteLine(@"Type a number:
+                1.Delete 
+                2.Add
+                3.Edit");
             Actions ac = (Actions)Enum.Parse(typeof(Actions), Console.ReadLine());
             switch (ac)
             {
