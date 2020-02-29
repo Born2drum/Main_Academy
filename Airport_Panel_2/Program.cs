@@ -38,9 +38,15 @@ namespace Airport_Panel_2
         delete = 1,
         add,
         edit,
+        search,
         exit
     };
-
+    public enum SearchE
+    {
+        byNum = 1,
+        byTime,
+        byCity
+    };
 
 
 
@@ -55,9 +61,9 @@ namespace Airport_Panel_2
             if (del > 0 && del <= flights.Count)
             {
                 flights.Remove(flights[del-1]);
-                for(int i=0; i<= flights.Count - del; i++)
+                for(int i=0; i< flights.Count; i++)
                 {
-                    flights[del-1 + i].index = flights[del-1 + i].index - 1;
+                    flights[i].index = i+1;
                 }
                 Console.WriteLine($"index:  date of arrival:       number of flight:       city:       airline:       terminal:       status:       gate:\r\n\r\n");
                 for (int i = 0; i < flights.Count; i++)
@@ -158,9 +164,9 @@ namespace Airport_Panel_2
                     Console.WriteLine("Incorrect gate, try again");
                     Add(flights);
                 }
-                for (int i = 0; i < flights.Count - n; i++)
+                for (int i = 0; i < flights.Count; i++)
                 {
-                    flights[n + i].index = flights[n + i].index + 1;
+                    flights[i].index = i + 1;
                 }
                 Console.WriteLine($"index:  date of arrival:       number of flight:       city:       airline:       terminal:       status:       gate:\r\n\r\n");
                 for (int i = 0; i < flights.Count; i++)
@@ -266,6 +272,7 @@ namespace Airport_Panel_2
                     Console.WriteLine("Incorrect gate, try again");
                     Add(flights);
                 }
+                
                 /*Console.WriteLine("Enter new date:");
                 flights[d].date = DateTime.Parse(Console.ReadLine());
                 Console.WriteLine("Enter new number of flight:");
@@ -301,9 +308,61 @@ namespace Airport_Panel_2
                         1.Delete 
                         2.Add
                         3.Edit
-                        4.Exit menu");
+                        4.Search
+                        5.Exit menu");
 
 
+        }
+
+
+       /* delegate void Search(List<Flight> flights);
+        Search srch = SearchByNum;*/
+        public static void SearchByNum(List <Flight> flights)
+        {
+            Console.WriteLine("Enter number of necessary flight");
+            int num = int.Parse(Console.ReadLine());
+            for(int i =0; i<flights.Count; i++)
+            {
+                if (flights[i].flightNumber == num)
+                {
+                    flights[i].Output();
+                    return;
+                }
+
+            }
+            Console.WriteLine("Flight with this number is not found");
+        }
+        public static void SearchByTime(List<Flight> flights)
+        {
+            Console.WriteLine("Enter number of necessary flight");
+            DateTime time = DateTime.Parse(Console.ReadLine());
+            for (int i = 0; i < flights.Count; i++)
+            {
+                if (flights[i].date == time)
+                {
+                    flights[i].Output();
+                }
+                else
+                {
+                    Console.WriteLine("Flight with this time is not found");
+                }
+            }
+        }
+        public static void SearchByCity(List<Flight> flights)
+        {
+            Console.WriteLine("Enter number of necessary flight");
+            string city = Console.ReadLine();
+            for (int i = 0; i < flights.Count; i++)
+            {
+                if (flights[i].city == city)
+                {
+                    flights[i].Output();
+                }
+                else
+                {
+                    Console.WriteLine("Flight with this city is not found");
+                }
+            }
         }
     }
 
@@ -371,6 +430,30 @@ namespace Airport_Panel_2
                         case Actions.edit:
                             Methods.Edit(flights);
                             Console.WriteLine("");
+                            break;
+                        case Actions.search:
+                            Console.WriteLine(@"Choose how to search:
+                                                       1.By number
+                                                       2.By time 
+                                                       3.By city");
+                            SearchE sch;
+                            sch = (SearchE)Enum.Parse(typeof(Actions), Console.ReadLine());
+                            if (sch > 0 && (int)sch < 4)
+                            {
+                                switch (sch)
+                                {
+                                    case SearchE.byNum:
+                                        Methods.SearchByNum(flights);
+                                        break;
+                                    case SearchE.byTime:
+                                        Methods.SearchByTime(flights);
+                                        break;
+                                    case SearchE.byCity:
+                                        Methods.SearchByCity(flights);
+                                        break;
+                                }
+                                Methods.Menu();
+                            }
                             break;
                         case Actions.exit:
                             break;
