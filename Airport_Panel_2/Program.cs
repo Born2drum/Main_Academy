@@ -9,6 +9,9 @@ namespace Airport_Panel_2
         FlightAdd,
         FlightEdit,
         search,
+        PassengerDelete,
+        PassengerAdd,
+        PassengerEdit,
         exit
     };
     public enum SearchE
@@ -50,19 +53,8 @@ namespace Airport_Panel_2
             }
             string[] sexs = { "male", "female" };
             string[] airclasses = { "economy", "busines" };
-            List<Passenger> passengers = new List<Passenger>();
-            for (int i = 1; i <= firstNames.Length; i++)
-            {
-                passengers.Add(new Passenger());
-                passengers[i - 1].index = i;
-                passengers[i - 1].firstName = firstNames[rnd.Next(0, firstNames.Length)];
-                passengers[i - 1].secondName = secondNames[rnd.Next(0, secondNames.Length)];
-                passengers[i - 1].nationality = nationalities[rnd.Next(0, nationalities.Length)];
-                passengers[i - 1].passport = passports[rnd.Next(0, passports.Length)];
-                passengers[i - 1].dateOfBirthday = datesOfBirthday[rnd.Next(0, datesOfBirthday.Length)];
-                passengers[i - 1].sex = sexs[rnd.Next(0, sexs.Length)];
-                passengers[i - 1].airclass = airclasses[rnd.Next(0, airclasses.Length)];
-            }
+
+
 
 
             int n = 5;
@@ -85,19 +77,33 @@ namespace Airport_Panel_2
 
             DateTime date = DateTime.Now;
             List<Flight> flights = new List<Flight>();
-            for (int i = 1; i <= n; i++)
+            for (int i = 0; i <= n; i++)
             {
+                List<Passenger> passengers = new List<Passenger>();
                 flights.Add(new Flight());
-                flights[i - 1].index = i;
-                flights[i - 1].date = date + TimeSpan.FromHours(2.0);
-                flights[i - 1].city = cities[rnd.Next(0, cities.Length)];
-                flights[i - 1].flightNumber = flightNumbers[rnd.Next(0, flightNumbers.Length)];
-                flights[i - 1].airline = airlines[rnd.Next(0, airlines.Length)];
-                flights[i - 1].terminal = terminals[rnd.Next(0, terminals.Length)];
-                flights[i - 1].status = statuses[rnd.Next(0, statuses.Length)];
-                flights[i - 1].gate = gates[rnd.Next(0, gates.Length)];
-                flights[i - 1].passengers = passengers;
+                flights[i].index = i+1;
+                flights[i].date = date + TimeSpan.FromHours(2.0);
+                flights[i].city = cities[rnd.Next(0, cities.Length)];
+                flights[i].flightNumber = flightNumbers[rnd.Next(0, flightNumbers.Length)];
+                flights[i].airline = airlines[rnd.Next(0, airlines.Length)];
+                flights[i].terminal = terminals[rnd.Next(0, terminals.Length)];
+                flights[i].status = statuses[rnd.Next(0, statuses.Length)];
+                flights[i].gate = gates[rnd.Next(0, gates.Length)];
+                flights[i].passengers = passengers;
                 date += TimeSpan.FromHours(2.0);
+                for (int j = 0; j <= firstNames.Length; j++)
+                {
+
+                    passengers.Add(new Passenger());
+                    passengers[j].index = j+1;
+                    passengers[j].firstName = firstNames[rnd.Next(0, firstNames.Length)];
+                    passengers[j].secondName = secondNames[rnd.Next(0, secondNames.Length)];
+                    passengers[j].nationality = nationalities[rnd.Next(0, nationalities.Length)];
+                    passengers[j].passport = passports[rnd.Next(0, passports.Length)];
+                    passengers[j].dateOfBirthday = datesOfBirthday[rnd.Next(0, datesOfBirthday.Length)];
+                    passengers[j].sex = sexs[rnd.Next(0, sexs.Length)];
+                    passengers[j].airclass = airclasses[rnd.Next(0, airclasses.Length)];
+                }
             }
             Console.WriteLine($"index:  date of arrival:       number of flight:       city:       airline:       terminal:       status:       gate:\r\n\r\n");
             for (int i = 0; i < flights.Count; i++)
@@ -113,7 +119,7 @@ namespace Airport_Panel_2
             do
             {
                 ac = (Actions)Enum.Parse(typeof(Actions), Console.ReadLine());
-                if (ac > 0 && (int)ac <7)
+                if (ac > 0 && (int)ac <9)
                 {
                     switch (ac)
                     {
@@ -153,6 +159,15 @@ namespace Airport_Panel_2
                                 Methods.Menu();
                             }
                             break;
+                        case Actions.PassengerDelete:
+                            Methods.PassengerDelete(flights);
+                            break;
+                        case Actions.PassengerAdd:
+                            Methods.PassengerAdd(flights);
+                            break;
+                        case Actions.PassengerEdit:
+                            Methods.PassengerEdit(flights);
+                            break;
                         case Actions.exit:
                             break;
 
@@ -168,23 +183,7 @@ namespace Airport_Panel_2
                 }
             } while (ac != Actions.exit);
 
-
-
-           
-
-
-
-
-
-
         }
-
-
-
-
-
-
-
 
     }
 }
